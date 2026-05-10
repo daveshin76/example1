@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20번 해설지 — PLA 담화론 전략</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:   #fefcf7;
+  --paper2:  #f5f0e8;
+  --paper3:  #ede6d6;
+  --ink:     #1a1410;
+  --ink2:    #3d342a;
+  --ink3:    #7a6f62;
+  --rule:    #d0c4b0;
+
+  --red:     #b5232f;
+  --red-bg:  #fdf2f2;
+  --red-bd:  rgba(181,35,47,.18);
+
+  --teal:    #0b6b5a;
+  --teal-bg: #f0faf7;
+  --teal-bd: rgba(11,107,90,.2);
+
+  --blue:    #1a4a8c;
+  --blue-bg: #f0f4fc;
+  --blue-bd: rgba(26,74,140,.2);
+
+  --gold:    #7a5500;
+  --gold-bg: #fdf8ee;
+  --gold-bd: rgba(122,85,0,.2);
+
+  --violet:  #5530a0;
+  --violet-bg:#f5f0ff;
+  --violet-bd:rgba(85,48,160,.2);
+
+  --green:   #2a6030;
+  --green-bg:#f0f9f2;
+  --green-bd:rgba(42,96,48,.2);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{background:#c8b89a;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+}
+
+/* ── A4 BOOK ── */
+.book{max-width:210mm;margin:0 auto;background:var(--paper);}
+
+/* ── COVER ── */
+.cover{
+  min-height:110mm;
+  background:var(--ink);
+  padding:44px 50px 40px;
+  position:relative;
+  overflow:hidden;
+}
+.cover::before{
+  content:'';
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.03) 40px),
+             repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,.03) 40px);
+}
+.cover::after{
+  content:'20';
+  position:absolute;right:40px;top:20px;
+  font-family:'Playfair Display',serif;
+  font-size:160px;font-weight:800;
+  color:rgba(255,255,255,.04);
+  line-height:1;pointer-events:none;
+}
+.cover-badge{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:4px;
+  color:#c8a96a;margin-bottom:24px;
+  display:flex;align-items:center;gap:10px;
+  position:relative;z-index:1;
+}
+.cover-badge::before{content:'';display:block;width:32px;height:1px;background:#c8a96a;}
+.cover h1{
+  font-family:'Nanum Myeongjo',serif;
+  font-size:clamp(26px,5vw,40px);font-weight:800;
+  color:#fff;line-height:1.25;
+  margin-bottom:12px;position:relative;z-index:1;
+}
+.cover h1 em{color:#c8a96a;font-style:normal;}
+.cover-meta{
+  font-size:12px;color:rgba(255,255,255,.4);
+  position:relative;z-index:1;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:16px;margin-top:24px;
+  font-family:'IBM Plex Mono',monospace;
+  letter-spacing:1.5px;
+}
+
+/* ── PAGE ── */
+.page{
+  padding:48px 50px 56px;
+  border-top:1px solid var(--rule);
+  position:relative;
+}
+
+/* ── PART BAND ── */
+.part-band{
+  display:flex;align-items:stretch;
+  background:var(--paper2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+  margin-bottom:28px;
+}
+.part-num{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:700;
+  color:var(--ink3);
+  padding:14px 20px;
+  border-right:1px solid var(--rule);
+  display:flex;align-items:center;
+  min-width:80px;justify-content:center;
+}
+.part-info{padding:14px 20px;display:flex;flex-direction:column;justify-content:center;}
+.part-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8px;letter-spacing:3px;
+  color:var(--ink3);text-transform:uppercase;
+  margin-bottom:4px;
+}
+.part-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.part-desc{font-size:12px;color:var(--ink3);}
+
+/* ── SECTION HEAD ── */
+.sec{display:flex;align-items:center;gap:10px;margin:26px 0 12px;}
+.sec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sec-title{font-family:'Nanum Myeongjo',serif;font-size:16px;font-weight:700;color:var(--ink);}
+
+/* ── PASSAGE BOX ── */
+.passage{
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+  margin-bottom:22px;
+}
+.passage-hd{
+  background:var(--ink);
+  padding:10px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.passage-hd-l{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.5);
+}
+.passage-hd-r{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:1px;color:#c8a96a;
+}
+.passage-body{padding:20px 22px;background:var(--paper);}
+.passage-text{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:13.5px;line-height:2;color:var(--ink2);
+}
+
+/* ── HIGHLIGHT MARKS ── */
+.hl-red   {background:rgba(181,35,47,.12);border-bottom:2px solid var(--red);   padding:0 2px;border-radius:2px;}
+.hl-teal  {background:rgba(11,107,90,.1); border-bottom:2px solid var(--teal);  padding:0 2px;border-radius:2px;}
+.hl-blue  {background:rgba(26,74,140,.1); border-bottom:2px solid var(--blue);  padding:0 2px;border-radius:2px;}
+.hl-gold  {background:rgba(122,85,0,.1);  border-bottom:2px solid var(--gold);  padding:0 2px;border-radius:2px;}
+.hl-violet{background:rgba(85,48,160,.1); border-bottom:2px solid var(--violet);padding:0 2px;border-radius:2px;}
+.hl-green {background:rgba(42,96,48,.1);  border-bottom:2px solid var(--green); padding:0 2px;border-radius:2px;}
+
+/* ── LEGEND ── */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.leg{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;padding:4px 12px;
+  border-radius:20px;border:1px solid;
+}
+
+/* ── CALLOUT ── */
+.callout{
+  border-radius:3px;
+  padding:14px 18px;
+  margin-bottom:18px;
+  font-size:13px;line-height:1.75;
+}
+.callout b{font-weight:700;}
+.tip  {background:var(--teal-bg); border-left:3px solid var(--teal); color:var(--ink2);}
+.warn {background:var(--gold-bg); border-left:3px solid var(--gold); color:var(--ink2);}
+.info {background:var(--blue-bg); border-left:3px solid var(--blue); color:var(--ink2);}
+.danger{background:var(--red-bg); border-left:3px solid var(--red);  color:var(--ink2);}
+.ok   {background:var(--green-bg);border-left:3px solid var(--green);color:var(--ink2);}
+.violet{background:var(--violet-bg);border-left:3px solid var(--violet);color:var(--ink2);}
+
+/* ── STEP ── */
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{
+  display:grid;grid-template-columns:36px 1fr;
+  border:1px solid var(--rule);
+  border-bottom:none;
+}
+.step:first-child{border-radius:4px 4px 0 0;}
+.step:last-child {border-bottom:1px solid var(--rule);border-radius:0 0 4px 4px;}
+.step-n{
+  background:var(--paper2);
+  border-right:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;
+  color:var(--ink3);
+  padding:12px 0;
+}
+.step-body{
+  padding:12px 16px;
+  font-size:13px;line-height:1.7;
+  color:var(--ink2);
+}
+.step-body b{font-weight:700;color:var(--ink);}
+
+/* ── ANSWER TABLE ── */
+.ans-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px;}
+.ans-table th{
+  background:var(--ink);color:#fff;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:2px;
+  padding:10px 14px;text-align:left;
+  font-weight:400;
+}
+.ans-table td{
+  padding:11px 14px;
+  border-bottom:1px solid var(--rule);
+  vertical-align:top;
+  line-height:1.65;
+}
+.ans-table tr:last-child td{border-bottom:none;}
+.ans-table tr.correct td{background:var(--green-bg);}
+.ans-table tr.wrong   td{background:var(--red-bg);}
+.no{
+  font-family:'Playfair Display',serif;
+  font-size:15px;font-weight:700;
+  white-space:nowrap;
+}
+.badge{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:1px;
+  padding:3px 10px;border-radius:20px;
+  margin-bottom:4px;
+}
+.badge-ok  {background:var(--green-bg);  color:var(--green);  border:1px solid var(--green-bd);}
+.badge-no  {background:var(--red-bg);    color:var(--red);    border:1px solid var(--red-bd);}
+.badge-trap{background:var(--gold-bg);   color:var(--gold);   border:1px solid var(--gold-bd);}
+
+/* ── SUMMARY TABLE ── */
+.sum-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.sum-table th{
+  background:var(--paper2);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:2px;color:var(--ink3);
+  padding:9px 14px;text-align:left;
+  border:1px solid var(--rule);
+  font-weight:400;
+}
+.sum-table td{
+  padding:9px 14px;
+  border:1px solid var(--rule);
+  vertical-align:top;line-height:1.65;
+}
+.sum-table td:first-child{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:600;
+  color:var(--ink3);white-space:nowrap;
+}
+
+/* ── FORMULA BOX ── */
+.formula{
+  background:var(--ink);
+  color:#fff;
+  border-radius:4px;
+  padding:20px 24px;
+  margin-bottom:20px;
+  text-align:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;letter-spacing:1px;
+  line-height:2;
+}
+.formula span{color:#c8a96a;font-size:16px;font-weight:600;}
+
+/* ── DIVIDER ── */
+.div{height:1px;background:var(--rule);margin:22px 0;}
+
+/* ── PAGE FOOTER ── */
+.pf{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:40px;padding-top:14px;
+  border-top:1px solid var(--rule);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:2px;color:var(--ink3);
+}
+
+/* ── PRINT ── */
+@media print{
+  html{background:#fff;}
+  .book{max-width:100%;}
+  .cover{min-height:auto;page-break-after:always;}
+  .page{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ══════════ COVER ══════════ -->
+<div class="cover">
+  <div class="cover-badge">PLA 수능 영어 담화론 전략</div>
+  <h1>20번 상세 해설<br><em>필자가 주장하는 바</em></h1>
+  <div class="cover-meta">DISCOURSE ANALYSIS · ARGUMENT IDENTIFICATION · PART 03–05 APPLIED</div>
+</div>
+
+<!-- ══════════ PAGE 1 : 지문 분석 ══════════ -->
+<div class="page">
+  <div class="part-band">
+    <div class="part-num">01</div>
+    <div class="part-info">
+      <div class="part-tag">Step 01 · Passage Scan</div>
+      <div class="part-name">지문 마킹 — 구조 표지 탐색</div>
+      <div class="part-desc">읽기 전 30초: 결론 연결사 · Booster · Shell Noun 먼저 표시</div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <b>문제 유형 확인 →</b> "필자가 <u>주장하는 바</u>로 가장 적절한 것은?" = <b>Argument Identification</b> 유형.<br>
+    풀이 순서: ① 결론 연결사 찾기 → ② Booster 찾기 → ③ Shell Noun 방향 확인 → ④ 선지 대입 검증
+  </div>
+
+  <!-- 마킹된 지문 -->
+  <div class="passage">
+    <div class="passage-hd">
+      <span class="passage-hd-l">20번 지문 — 담화 표지 마킹</span>
+      <span class="passage-hd-r">색깔 = 역할별 구분</span>
+    </div>
+    <div class="passage-body">
+      <p class="passage-text">
+        When it comes to resisting temptation and maximizing our willpower,
+        <span class="hl-blue">we need the capacity to calm the body and mind.</span>
+        Anything that <span class="hl-red">increases stress</span> is going to have a negative impact on our ability to make wise choices and
+        <span class="hl-red">increase the likelihood</span> that we will instead act based on how we feel right now and work against our goals.
+        So if you are <span class="hl-red">sleep-deprived or not eating well</span>, your chances of sticking to your goals go down.
+        When it comes to <span class="hl-teal">relieving stress and increasing your capacity for willpower</span>,
+        <span class="hl-teal">exercise is a top choice.</span>
+        <span class="hl-gold">Therefore,</span>
+        <span class="hl-green">we <span class="hl-gold">must</span> recognize that <b>increasing physical activity is essential for strengthening willpower.</b></span>
+        Whatever change you are working on, you should increase your level of activity,
+        as it is a great way of building the self-control necessary to maintain your goals.
+      </p>
+      <div class="legend">
+        <span class="leg" style="background:var(--blue-bg);color:var(--blue);border-color:var(--blue-bd)">■ 도입 주장 (연역형 첫 문장)</span>
+        <span class="leg" style="background:var(--red-bg);color:var(--red);border-color:var(--red-bd)">■ 반박 배경 (스트레스·수면 부족)</span>
+        <span class="leg" style="background:var(--teal-bg);color:var(--teal);border-color:var(--teal-bd)">■ 핵심 근거 (운동의 효과)</span>
+        <span class="leg" style="background:var(--gold-bg);color:var(--gold);border-color:var(--gold-bd)">■ Therefore + must = 결론 확정</span>
+        <span class="leg" style="background:var(--green-bg);color:var(--green);border-color:var(--green-bd)">■ 주제문 (정답 근거 문장)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pf">
+    <span>PLA · 수능 영어 담화론 전략</span>
+    <span>01</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2 : 담화론 3단계 풀이 ══════════ -->
+<div class="page">
+  <div class="part-band">
+    <div class="part-num">02</div>
+    <div class="part-info">
+      <div class="part-tag">Step 02 · Discourse Analysis</div>
+      <div class="part-name">담화론 3단계 적용</div>
+      <div class="part-desc">PART 03 연결사 + PART 04 구조 + PART 05 Booster → 주제문 확정</div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="sec">
+    <div class="sec-dot" style="background:var(--blue)"></div>
+    <div class="sec-title">STEP 1 · 글의 거시 구조 파악 (PART 04)</div>
+  </div>
+
+  <div class="callout info">
+    이 지문은 <b>연역형(Deductive) + 귀납형 결론 보강</b> 혼합 구조입니다.<br>
+    첫 문장에서 의지력을 위한 일반 원리를 제시하고 → 근거를 쌓은 뒤 → Therefore로 결론을 내립니다.
+  </div>
+
+  <div class="steps" style="margin-bottom:20px;">
+    <div class="step">
+      <div class="step-n">①</div>
+      <div class="step-body">
+        <b>첫 문장 (도입 주장)</b> — "we need the capacity to calm the body and mind."<br>
+        추상적·포괄적 진술 → 연역형 주장 제시. 이후 내용이 이를 뒷받침할 예정임을 신호.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">②</div>
+      <div class="step-body">
+        <b>중간 (근거·예시)</b> — 스트레스 증가 시 부정적 결과, 수면 부족 예시, 운동의 효과.<br>
+        "So if you are sleep-deprived…" = 예시 신호 (PART 03 인과). 예시 내용은 주제가 아님.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">③</div>
+      <div class="step-body">
+        <b>결론 문장</b> — "exercise is a top choice." 이후 <span class="hl-gold" style="font-size:12px;">Therefore</span> 등장.<br>
+        결론 연결사 = 주제문 바로 앞 신호 (PART 03 핵심 규칙).
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="sec">
+    <div class="sec-dot" style="background:var(--gold)"></div>
+    <div class="sec-title">STEP 2 · 결론 연결사 + Booster 이중 확인 (PART 03 · 05)</div>
+  </div>
+
+  <div class="formula">
+    <span>Therefore</span> (결론 연결사, PART 03)
+    &nbsp;+&nbsp;
+    <span>must</span> (Booster, PART 05)
+    &nbsp;=&nbsp;
+    <span>주제문 100% 확정</span>
+  </div>
+
+  <div class="callout ok">
+    <b>주제문:</b> "we must recognize that <b>increasing physical activity is essential for strengthening willpower.</b>"<br><br>
+    → 한국어로: <b>"신체 활동을 늘리는 것이 의지력 강화에 필수적임을 반드시 인식해야 한다."</b>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="sec">
+    <div class="sec-dot" style="background:var(--violet)"></div>
+    <div class="sec-title">STEP 3 · 마지막 문장으로 주장 재확인 (PART 04)</div>
+  </div>
+
+  <div class="callout violet">
+    "you should <b>increase your level of activity</b>, as it is a great way of building the <b>self-control</b> necessary to maintain your goals."<br><br>
+    주제문을 <b>행동 지침 형태로 재진술</b>. "should"는 부드러운 Booster 역할 → 주제 방향 일치 확인.
+  </div>
+
+  <div class="pf">
+    <span>PLA · 수능 영어 담화론 전략</span>
+    <span>02</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 3 : 선지 분석 ══════════ -->
+<div class="page">
+  <div class="part-band">
+    <div class="part-num">03</div>
+    <div class="part-info">
+      <div class="part-tag">Step 03 · Option Analysis</div>
+      <div class="part-name">선지 정오 분석 — 오답 유형 분류</div>
+      <div class="part-desc">정답은 주제문과 의미가 일치하는 것, 나머지는 오답 유형별로 분류</div>
+    </div>
+  </div>
+
+  <table class="ans-table">
+    <thead>
+      <tr>
+        <th style="width:42px">선지</th>
+        <th style="width:72px">판정</th>
+        <th>선지 내용</th>
+        <th>오답 유형 · 근거</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="wrong">
+        <td class="no">①</td>
+        <td><span class="badge badge-no">오답</span><br><span class="badge badge-trap">없는내용</span></td>
+        <td>신체에 무리를 주는 장시간의 과도한 운동을 삼가야 한다.</td>
+        <td>
+          지문은 운동량을 <b>늘리라</b>고 주장. "과도한 운동을 삼가야"라는 내용은 지문 어디에도 없음.<br>
+          <span style="font-size:11px;color:var(--red);font-family:'IBM Plex Mono',monospace;">▸ 유형: 지문에 없는 정보 삽입</span>
+        </td>
+      </tr>
+      <tr class="correct">
+        <td class="no">②</td>
+        <td><span class="badge badge-ok">✓ 정답</span></td>
+        <td>스트레스를 완화하고 의지력을 강화하려면 운동을 해야 한다.</td>
+        <td>
+          주제문 "increasing physical activity is essential for strengthening willpower"와 완벽히 일치.<br>
+          Therefore + must 문장의 요약 = 정답.<br>
+          <span style="font-size:11px;color:var(--green);font-family:'IBM Plex Mono',monospace;">▸ Therefore + must → 결론 = 주제문</span>
+        </td>
+      </tr>
+      <tr class="wrong">
+        <td class="no">③</td>
+        <td><span class="badge badge-no">오답</span><br><span class="badge badge-trap">지엽 과잉</span></td>
+        <td>즉각적인 충동보다 계획된 행동을 통해 목표를 달성해야 한다.</td>
+        <td>
+          "act based on how we feel right now"에서 "즉각적 충동"을 연상했지만 이건 <b>배경 설명의 예시</b>.<br>
+          주제문의 핵심어인 "운동/신체활동"이 선지에 없음.<br>
+          <span style="font-size:11px;color:var(--red);font-family:'IBM Plex Mono',monospace;">▸ 유형: 예시·지엽 내용을 주제로 오해</span>
+        </td>
+      </tr>
+      <tr class="wrong">
+        <td class="no">④</td>
+        <td><span class="badge badge-no">오답</span><br><span class="badge badge-trap">단어함정</span></td>
+        <td>스트레스를 유발하는 주변 환경적 요인들을 제거해야 한다.</td>
+        <td>
+          "스트레스"는 지문에 등장하지만 해결책이 <b>"환경 요인 제거"가 아니라 "운동"</b>임.<br>
+          지문 단어(stress)를 이용한 전형적 함정 선지.<br>
+          <span style="font-size:11px;color:var(--red);font-family:'IBM Plex Mono',monospace;">▸ 유형: 지문 단어 재활용 함정 (PART 06)</span>
+        </td>
+      </tr>
+      <tr class="wrong">
+        <td class="no">⑤</td>
+        <td><span class="badge badge-no">오답</span><br><span class="badge badge-trap">지엽 과잉</span></td>
+        <td>건강한 삶을 위해서 규칙적인 생활을 습관화해야 한다.</td>
+        <td>
+          수면·식사 예시에서 "규칙적 생활"을 연상. 하지만 이는 근거 단락의 <b>반례 예시</b>.<br>
+          주제문과 무관. "건강한 삶"은 지문의 핵심 주제어도 아님.<br>
+          <span style="font-size:11px;color:var(--red);font-family:'IBM Plex Mono',monospace;">▸ 유형: 예시 내용 과잉 일반화</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <b>오답 함정 공통 패턴:</b> ①③④⑤ 모두 지문의 <b>단어나 예시 내용을 재활용</b>하면서 주제와 다른 방향을 가리킵니다.<br>
+    "스트레스", "목표", "충동", "수면·식사" 등의 단어가 보인다고 바로 선택하면 안 됩니다.<br>
+    → <b>주제문(Therefore + must 문장)과 의미가 일치하는지</b>를 반드시 검증하세요.
+  </div>
+
+  <div class="pf">
+    <span>PLA · 수능 영어 담화론 전략</span>
+    <span>03</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 4 : 이론 연결 & 핵심 정리 ══════════ -->
+<div class="page">
+  <div class="part-band">
+    <div class="part-num">04</div>
+    <div class="part-info">
+      <div class="part-tag">Step 04 · Theory Connection</div>
+      <div class="part-name">PLA 이론 연결 · 핵심 정리</div>
+      <div class="part-desc">이 문제에서 사용된 담화론 도구 총정리</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-dot" style="background:var(--ink)"></div>
+    <div class="sec-title">사용된 PLA 전략 연결표</div>
+  </div>
+
+  <table class="sum-table" style="margin-bottom:22px;">
+    <thead>
+      <tr>
+        <th>PART</th>
+        <th>적용 개념</th>
+        <th>지문 속 증거</th>
+        <th>풀이 효과</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--red)">PART 03<br>연결사</td>
+        <td><b>Therefore</b> = 결론 연결사</td>
+        <td>"Therefore, we must recognize…"</td>
+        <td>주제문 위치를 즉시 특정</td>
+      </tr>
+      <tr>
+        <td style="color:var(--violet)">PART 05<br>Booster</td>
+        <td><b>must</b> = 강조 표지</td>
+        <td>"we must recognize that…"</td>
+        <td>주제문 확정 / 필자 주장 강도 확인</td>
+      </tr>
+      <tr>
+        <td style="color:var(--blue)">PART 04<br>글의 구조</td>
+        <td>연역형 구조</td>
+        <td>첫 문장 포괄 주장 → 근거 → 결론</td>
+        <td>지문 전체 논리 흐름 파악</td>
+      </tr>
+      <tr>
+        <td style="color:var(--teal)">PART 03<br>예시 신호</td>
+        <td><b>So if</b> = 조건·예시</td>
+        <td>"So if you are sleep-deprived…"</td>
+        <td>이후 내용이 예시임을 인식 → 주제 아님</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold)">PART 06<br>오답 제거</td>
+        <td>단어 재활용 함정</td>
+        <td>④의 "스트레스" 재활용</td>
+        <td>지문 단어만 보고 선택하면 함정</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sec">
+    <div class="sec-dot" style="background:var(--green)"></div>
+    <div class="sec-title">이 문제의 핵심 공식</div>
+  </div>
+
+  <div class="formula">
+    "필자가 주장하는 바" 문제 풀이 공식<br><br>
+    <span>① Therefore / Thus / Hence</span> → 결론 연결사 확인<br>
+    <span>② must / clearly / certainly</span> → Booster 확인<br>
+    <span>③ 두 가지가 겹친 문장 = 주제문 확정</span><br>
+    <span>④ 주제문과 의미가 일치하는 선지 = 정답</span>
+  </div>
+
+  <div class="sec">
+    <div class="sec-dot" style="background:var(--red)"></div>
+    <div class="sec-title">자주 틀리는 이유 — 오답 유혹 패턴</div>
+  </div>
+
+  <div class="steps" style="margin-bottom:22px;">
+    <div class="step">
+      <div class="step-n">❌</div>
+      <div class="step-body">
+        <b>지문 단어 보고 바로 선택</b><br>
+        "stress"가 보여서 ④ 선택 → 하지만 해결책이 다름. 단어가 아니라 <b>주제문 내용</b>이 기준.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">❌</div>
+      <div class="step-body">
+        <b>예시 내용을 주제로 착각</b><br>
+        수면·식사 내용 보고 ⑤ 선택 → "So if…" = 예시 신호. <b>예시 이전 일반 진술이 핵심</b>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">❌</div>
+      <div class="step-body">
+        <b>지문에 없는 내용 삽입</b><br>
+        "과도한 운동 삼가야" → 지문이 말한 적 없는 내용. <b>지문 밖 상식을 끌어오면 안 됨</b>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">✓</div>
+      <div class="step-body">
+        <b>올바른 풀이</b><br>
+        Therefore + must → 주제문 확정 → "운동 = 의지력 강화 수단" → ② 일치 확인 → 정답.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <b>최종 원칙:</b> "필자가 주장하는 바" 문제는 영어를 전부 해석하기 전에 <b>Therefore / must / clearly</b> 세 가지 표지만 먼저 찾아라. 이 표지들이 있는 문장이 주제문이고, 그 문장과 의미가 일치하는 선지가 정답이다.
+  </div>
+
+  <div class="pf">
+    <span>PLA · 수능 영어 담화론 전략</span>
+    <span>04</span>
+  </div>
+</div>
+
+</div><!-- /book -->
+</body>
+</html>
